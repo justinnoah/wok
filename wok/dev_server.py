@@ -14,13 +14,17 @@ page, and thus, goes into a subdirectory. This way, your CSS include tag could
 read `<link type='text/css' href='/base.css' />` (note the '/' in the `href`
 property) and `base.css` can be accessed from anywhere.
 '''
+from __future__ import print_function
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
 import sys
 import os
-from BaseHTTPServer import HTTPServer
-from SimpleHTTPServer import SimpleHTTPRequestHandler
+from http.server import HTTPServer
+from http.server import SimpleHTTPRequestHandler
 
-class dev_server:
+class dev_server(object):
 
     def __init__(self, serv_dir=None, host='', port=8000, dir_mon=False,
             watch_dirs=[], change_handler=None):
@@ -55,19 +59,19 @@ class dev_server:
 
         print("Starting dev server on http://%s:%s... (Ctrl-C to stop)"
                 %(socket_info[0], socket_info[1]))
-        print "Serving files from", self.serv_dir
+        print("Serving files from", self.serv_dir)
 
         if self.dir_mon:
-            print "Monitoring the following directories for changes: "
+            print("Monitoring the following directories for changes: ")
             for d in self.watch_dirs:
-                print "\t", d
+                print("\t", d)
         else:
-            print "Directory monitoring is OFF"
+            print("Directory monitoring is OFF")
 
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
-            print "\nStopping development server..."
+            print("\nStopping development server...")
 
 
 class RebuildHandlerWrapper(object):

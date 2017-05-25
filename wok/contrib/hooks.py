@@ -1,10 +1,14 @@
 # vim: set fileencoding=utf8 :
 """Some hooks that might be useful."""
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import range
+from builtins import object
 import os
 import glob
 import subprocess
-from StringIO import StringIO
+from io import StringIO
 import logging
 
 from slugify import slugify

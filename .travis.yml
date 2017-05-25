@@ -1,19 +1,19 @@
 language: python
-python: ["2.7"]
+python: [
+    "2.7","3.5"]
 sudo: false
 
 env:
   - PYTHON_TESTS=true TEST_SITE=false CMP_OUTPUT=false
   - PYTHON_TESTS=false TEST_SITE=docs CMP_OUTPUT=false
   - PYTHON_TESTS=false TEST_SITE=test_site CMP_OUTPUT=true
-  - PYTHON_TESTS=false TEST_SITE=OSULUG/OSULUG-website CMP_OUTPUT=false
 
 script: 
   - bin/python-tests
   - bin/site-tests
 
 notifications:
-    email: false
+    email: true
     irc:
         channels:
             - "chat.freenode.net#wok"

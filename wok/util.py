@@ -1,10 +1,13 @@
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 import re
 from unicodedata import normalize
 from datetime import date, time, datetime, timedelta
 
 def chunk(li, n):
     """Yield succesive n-size chunks from l."""
-    for i in xrange(0, len(li), n):
+    for i in range(0, len(li), n):
         yield li[i:i+n]
 
 def date_and_times(meta):
@@ -30,8 +33,8 @@ def date_and_times(meta):
 
     if isinstance(time_part, int):
         seconds = time_part % 60
-        minutes = (time_part / 60) % 60
-        hours = (time_part / 3600)
+        minutes = (old_div(time_part, 60)) % 60
+        hours = (old_div(time_part, 3600))
 
         time_part = time(hours, minutes, seconds)
 

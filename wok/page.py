@@ -1,4 +1,6 @@
 # System
+from builtins import str
+from builtins import object
 import os
 import sys
 from collections import namedtuple
@@ -165,7 +167,7 @@ class Page(object):
                 logging.error("A page was generated that is not from a file, "
                         "has no title, and no slug. I don't know what to do. "
                         "Not using this page.")
-                logging.info("Bad Meta's keys: {0}".format(self.meta.keys()))
+                logging.info("Bad Meta's keys: {0}".format(list(self.meta.keys())))
                 logging.debug("Bad Meta: {0}".format(self.meta))
                 raise BadMetaException()
 
@@ -179,7 +181,7 @@ class Page(object):
                 logging.info("You didn't specify a slug, generating it from the "
                              "filename.")
             else:
-                self.meta['slug'] = slugify(unicode(self.meta['title']))
+                self.meta['slug'] = slugify(str(self.meta['title']))
                 logging.info("You didn't specify a slug, and no filename "
                              "exists. Generating the slug from the title.")
 
@@ -371,7 +373,7 @@ class Page(object):
 
         # ... and actions! (and logging, and hooking)
         self.engine.run_hook('page.template.pre', self, templ_vars)
-        logging.debug('templ_vars.keys(): ' + repr(templ_vars.keys()))
+        logging.debug('templ_vars.keys(): ' + repr(list(templ_vars.keys())))
         self.rendered = self.template.render(templ_vars)
         logging.debug('extra pages is: ' + repr(extra_pages))
         self.engine.run_hook('page.template.post', self)

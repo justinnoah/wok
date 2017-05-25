@@ -1,4 +1,6 @@
 #!/usr/bin/python2
+from builtins import str
+from builtins import object
 import os
 import sys
 import shutil
@@ -449,7 +451,7 @@ class Engine(object):
                 },
             }
 
-            for k, v in self.options.iteritems():
+            for k, v in self.options.items():
                 if k not in ('site_title', 'output_dir', 'content_dir',
                         'templates_dir', 'media_dir', 'url_pattern'):
 
