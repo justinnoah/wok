@@ -27,6 +27,7 @@ setup(
     install_requires=[
         'awesome-slugify==1.6.5',
         'docutils==0.13.1',
+        'future==0.16.0',
         'Jinja2==2.9.6',
         'Markdown==2.6.8',
         'Pygments==2.2.0',
